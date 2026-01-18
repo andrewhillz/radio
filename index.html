@@ -182,7 +182,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            /* Zoom animation removed */
         }
 
         .track-info h2 {
@@ -349,7 +348,7 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             padding: 12px;
-            border-radius: 50%; /* Circle shape as requested */
+            border-radius: 50%; 
             border: var(--glass-border);
             cursor: pointer;
             transition: background 0.2s, transform 0.2s;
@@ -379,7 +378,7 @@
         /* The Menu (Hidden by default) */
         .dropdown-menu {
             position: absolute;
-            top: 120%; /* Below trigger on desktop */
+            top: 120%; 
             right: 0;
             width: 180px;
             background: var(--menu-bg);
@@ -388,12 +387,11 @@
             border: var(--glass-border);
             border-radius: 16px;
             padding: 8px;
-            display: flex; /* flex but hidden via visibility/opacity */
+            display: flex; 
             flex-direction: column;
             gap: 4px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             
-            /* Animation States */
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
@@ -438,7 +436,7 @@
 
         .theme-option.active {
             background: var(--accent-color);
-            color: var(--play-btn-text); /* Contrast text */
+            color: var(--play-btn-text);
         }
         
         .theme-option.active svg {
@@ -485,11 +483,10 @@
             /* On Mobile, menu pops UP */
             .dropdown-menu {
                 top: auto;
-                bottom: 120%; /* Above trigger */
+                bottom: 120%; 
                 right: 50%;
-                transform: translateX(50%) translateY(10px); /* Start slightly lower */
-                /* Re-center horizontally */
-                margin-right: -90px; /* Half of width (180px) to center it relative to right:50% */
+                transform: translateX(50%) translateY(10px); 
+                margin-right: -90px; 
             }
 
             .theme-dropdown.open .dropdown-menu {
@@ -601,7 +598,7 @@
 
     // 1. PLAYLIST
     const playlist = [
-        // --- CRAZYCAT BLOCK (Updated with new tracks and cover logic) ---
+        // --- SCREENSHOT 1: LIME - DRAMA (Cover: popcorn.jpg) ---
         { title: "Lime", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Lime.mp3", duration: 68 },
         { title: "balloon", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/balloon.mp3", duration: 80 },
         { title: "Underground", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Underground.mp3", duration: 114 },
@@ -616,6 +613,8 @@
         { title: "Diamonds", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Diamonds.mp3", duration: 144 },
         { title: "Midnight Party", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Midnight Party.mp3", duration: 64 },
         { title: "Drama", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Drama.mp3", duration: 131 },
+
+        // --- SCREENSHOT 1: THE REST (Cover: popcorn2.jpg) ---
         { title: "Deluxe", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Deluxe.mp3", duration: 122 },
         { title: "Haunted", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Haunted.mp3", duration: 93 },
         { title: "Black and White Dancefloor", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Black and White Dancefloor.mp3", duration: 62 },
@@ -623,6 +622,25 @@
         { title: "problems", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/problems.mp3", duration: 153 },
         { title: "Daydream", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Daydream.mp3", duration: 164 },
         { title: "9 PM", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/9 PM.mp3", duration: 79 },
+
+        // --- SCREENSHOT 2: EXPRESSIONS (Cover: Expressions.jpg) ---
+        { title: "Alone", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Alone.mp3", duration: 79 },
+        { title: "Beware", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Beware.mp3", duration: 133 },
+        { title: "Caution", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Caution.mp3", duration: 76 },
+        { title: "Daylight", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Daylight.mp3", duration: 135 },
+        { title: "Enjoy This Time", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Enjoy This Time.mp3", duration: 131 },
+        { title: "Glitch", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Glitch.mp3", duration: 99 },
+        { title: "Insane", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Insane.mp3", duration: 106 },
+        { title: "Mirage", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Mirage.mp3", duration: 73 },
+        { title: "Mountain Peak", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Mountain Peak.mp3", duration: 96 },
+        { title: "Push Through It", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Push Through It.mp3", duration: 78 },
+        { title: "Running", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Running.mp3", duration: 61 },
+        { title: "Silk", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Silk.mp3", duration: 69 },
+        { title: "So Stressed", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/So Stressed.mp3", duration: 96 },
+        { title: "dramatic irony", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/dramatic irony.mp3", duration: 139 },
+        { title: "Expressions", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Expressions.mp3", duration: 151 },
+        { title: "Jump In!", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Jump In!.mp3", duration: 96 },
+        { title: "Light & Airy", artist: "Crazycat", cover: "covers/Expressions.jpg", src: "audio/Light & Airy.mp3", duration: 91 },
     ];
 
     const player = document.getElementById('radio-player');
