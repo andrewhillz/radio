@@ -48,14 +48,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* REDUCED PADDING for zoomed out feel */
             padding: 30px; 
             box-sizing: border-box;
         }
 
         .radio-container {
             width: 100%;
-            /* REDUCED MAX-WIDTH for zoomed out feel */
             max-width: 900px; 
             position: relative;
         }
@@ -72,7 +70,6 @@
         .player-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            /* REDUCED GAP */
             gap: 60px; 
             align-items: center;
         }
@@ -87,11 +84,11 @@
 
         .radio-header {
             width: 100%;
-            margin-bottom: 25px; /* Tighter spacing */
+            margin-bottom: 25px; 
         }
 
         .header-top {
-            font-size: 0.75rem; /* Smaller font */
+            font-size: 0.75rem; 
             color: var(--accent-color);
             letter-spacing: 2px;
             margin-bottom: 5px;
@@ -100,7 +97,7 @@
         }
 
         .header-main {
-            font-size: 1.8rem; /* Smaller font */
+            font-size: 1.8rem; 
             color: var(--text-main);
             margin: 0;
             line-height: 1;
@@ -109,14 +106,12 @@
 
         .main-cover {
             width: 100%;
-            /* REDUCED MAX SIZE */
             max-width: 350px; 
             aspect-ratio: 1/1;
             background: var(--bg-queue);
-            /* LESS ROUNDED CORNERS */
             border-radius: 12px; 
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-            margin-bottom: 25px; /* Tighter spacing */
+            margin-bottom: 25px; 
             overflow: hidden;
         }
 
@@ -125,27 +120,25 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            /* Zoom animation removed here */
         }
-
-        .playing .main-cover img { transform: scale(1.06); }
 
         .track-info h2 {
             margin: 0 0 8px 0;
-            font-size: 1.6rem; /* Smaller font */
+            font-size: 1.6rem; 
             color: var(--text-main);
             line-height: 1.1;
         }
 
         .track-info p {
             margin: 0;
-            font-size: 1rem; /* Smaller font */
+            font-size: 1rem; 
             color: var(--text-sub);
             font-weight: 500;
         }
 
         .controls-wrapper {
-            margin-top: 35px; /* Tighter spacing */
+            margin-top: 35px; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -155,7 +148,6 @@
             background: var(--accent-color);
             color: var(--play-btn-text);
             border: none;
-            /* SMALLER BUTTON */
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -165,7 +157,7 @@
             align-items: center;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 0 30px var(--accent-glow);
-            margin-bottom: 20px; /* Tighter spacing */
+            margin-bottom: 20px; 
         }
 
         .play-btn:hover {
@@ -173,7 +165,6 @@
             filter: brightness(1.1);
         }
 
-        /* SMALLER ICON */
         .play-btn svg { width: 36px; height: 36px; fill: currentColor; }
         #icon-stop { display: none; }
         .playing #icon-play { display: none; }
@@ -186,14 +177,13 @@
             justify-content: center;
             height: 100%;
             border-left: 1px solid var(--divider-color);
-            /* REDUCED PADDING */
             padding-left: 60px; 
         }
 
         .queue-section { width: 100%; }
 
         .queue-label {
-            font-size: 0.75rem; /* Smaller font */
+            font-size: 0.75rem; 
             text-transform: uppercase;
             color: var(--text-sub);
             margin-bottom: 12px;
@@ -208,9 +198,7 @@
             display: flex;
             align-items: center;
             background: var(--bg-queue);
-            /* REDUCED PADDING */
             padding: 14px;
-            /* LESS ROUNDED */
             border-radius: 10px; 
             transition: background 0.2s, transform 0.2s;
             cursor: default;
@@ -223,10 +211,8 @@
         }
 
         .mini-thumb {
-            /* SMALLER THUMBNAIL */
             width: 52px;
             height: 52px;
-            /* LESS ROUNDED */
             border-radius: 8px; 
             background: #333;
             margin-right: 18px;
@@ -242,7 +228,7 @@
         }
 
         .mini-title { 
-            font-size: 1rem; /* Smaller font */
+            font-size: 1rem; 
             color: var(--text-main); 
             white-space: nowrap; 
             overflow: hidden; 
@@ -252,7 +238,7 @@
         
         .mini-artist { 
             color: var(--text-sub); 
-            font-size: 0.85rem; /* Smaller font */
+            font-size: 0.85rem; 
             font-weight: 500;
         }
 
@@ -262,7 +248,7 @@
             align-items: center;
             gap: 10px;
             background: var(--bg-queue);
-            padding: 10px 20px; /* Tighter padding */
+            padding: 10px 20px; 
             border-radius: 30px;
         }
         .status-label { font-size: 0.8rem; color: var(--accent-color); letter-spacing: 2px; }
@@ -285,7 +271,6 @@
             background: transparent;
             border: 1px solid var(--divider-color);
             color: var(--text-sub);
-            /* SMALLER BUTTON */
             width: 42px;
             height: 42px;
             border-radius: 50%;
@@ -311,14 +296,14 @@
             .player-grid {
                 display: flex;
                 flex-direction: column;
-                gap: 30px; /* Tighter gap on mobile */
+                gap: 30px; 
             }
 
             .right-column {
                 border-left: none;
                 border-top: 1px solid var(--divider-color);
                 padding-left: 0;
-                padding-top: 30px; /* Tighter padding */
+                padding-top: 30px; 
                 width: 100%;
             }
 
@@ -410,6 +395,7 @@
 
     // 1. PLAYLIST
     const playlist = [
+        // --- CRAZYCAT BLOCK ---
         { title: "The Theme of an Unsinister Workplace", artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/01 The Theme of an Unsinister Workplace.m4a", duration: 80 },
         { title: "Trustworthy",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/02 Trustworthy.m4a",                        duration: 77 },
         { title: "THEALIENSAREHERE",                   artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/03 THEALIENSAREHERE.m4a",                   duration: 83 },
@@ -426,7 +412,29 @@
         { title: "Pause",                              artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/14 Pause.mp3",                              duration: 107 },
         { title: "Dance Moves",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Dance Moves.mp3",                           duration: 87 },
         { title: "Error 410",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/16 Error 410.m4a",                          duration: 104 },
-        { title: "Don't Unplug The Arcade Machine",    artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/17 Don't Unplug The Arcade Machine 1.m4a",  duration: 71 }
+        { title: "Don't Unplug The Arcade Machine",    artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/17 Don't Unplug The Arcade Machine 1.m4a",  duration: 71 },
+        
+        // --- PEASINAPOD BLOCK (NEW) ---
+        { title: "Introduction To Quantum Mechanics", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/01 Introduction To Quantum Mechanics.m4a", duration: 43 },
+        { title: "Giant Frog", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/02 Giant Frog.m4a", duration: 143 },
+        { title: "The Paper Making Facility", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/03 The Paper Making Facility.m4a", duration: 120 },
+        { title: "Hey Babe, Did You Put Salt In The Water?", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/04 Hey Babe, Did You Put Salt In The Water_.m4a", duration: 43 },
+        { title: "You Are Dead Now (Fruit Fly)", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/05 You Are Dead Now (Fruit Fly).m4a", duration: 159 },
+        { title: "Fro-Yo Coupon", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/06 Fro-Yo Coupon.m4a", duration: 144 },
+        { title: "Sunscreen", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/07 Sunscreen.m4a", duration: 61 },
+        { title: "The Peas In The Garden Are Eating My Grandma", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/08 The Peas In The Garden Are Eating My Grandma.m4a", duration: 79 },
+        { title: "I Was Just Trying To Turn Up The Sound And It Went Back To Android", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/09 I Was Just Trying To Turn Up The Sound And It Went Back To Android.wav", duration: 42 },
+        { title: "I'm So Glad That Chair Is Still Here (There's A Hole)", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/10 I'm So Glad That Chair Is Still Here (There's A Hole).m4a", duration: 105 },
+        { title: "The Refund", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/11 The Refund.m4a", duration: 113 },
+        { title: "The Popcorn's Not Popping (feat. Anna Quinlan of The Recess Monkeys)", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/12 The Popcorn's Not Popping.m4a", duration: 85 },
+        { title: "Crash Into The Wall", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/13 Crash Into The Wall.m4a", duration: 49 },
+        { title: "Are You Ready To Be Buried Alive?", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/14 Are You Ready To Be Buried Alive_.wav", duration: 70 },
+        { title: "I Warned You The Bacon Was Hot", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/15 I Warned You The Bacon Was Hot.wav", duration: 49 },
+        { title: "Buttons", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/16 Buttons.wav", duration: 71 },
+        { title: "37.5", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/17 37.5.wav", duration: 137 },
+        { title: "If You See Something, Say Something", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/18 If You See Something, Say Something.wav", duration: 148 },
+        { title: "There Was Once A Cow", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/19 There Was Once A Cow.wav", duration: 79 },
+        { title: "I Just Telepathically Knew That My Laundry Done", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/20 I Just Telepathically Knew That My Laundry Done.wav", duration: 80 },
     ];
 
     const player = document.getElementById('radio-player');
