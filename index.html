@@ -11,13 +11,13 @@
 
     <style>
         :root {
-            --bg-main: #18181b;       
-            --bg-queue: #27272a;      
-            --text-main: #ffffff;     
-            --text-sub: #a1a1aa;      
-            --accent-red: #ef4444;    
-            --btn-bg: #ffffff;        
-            --btn-icon: #000000;      
+            --bg-main: #18181b;        
+            --bg-queue: #27272a;       
+            --text-main: #ffffff;      
+            --text-sub: #a1a1aa;       
+            --accent-red: #ef4444;     
+            --btn-bg: #ffffff;         
+            --btn-icon: #000000;       
         }
 
         body {
@@ -339,105 +339,27 @@
     // 0. GLOBAL TIME SYNC VARIABLES
     let serverTimeOffset = 0; 
 
-    // 1. EXTENDED PLAYLIST (Fixed commas)
+    // 1. NEW PLAYLIST
+    // Note: I have assumed your audio files are in a folder named 'audio'
+    // and your cover image is in a folder named 'covers'.
     const playlist = [
-        // BLOCK A
-        { title: "GET YOUR MATRESS AT SLEEP COUNTRY TODAY!",                 artist: "Sleep Country",       cover: "covers/radio27.jpg", src: "audio/sleep.mp3",                        duration: 68 },
-        { title: "JOIN US TODAY AT THE CHURCH OF ATLANTIS!",                 artist: "The Church of Atlantis",       cover: "covers/radio24.jpg", src: "audio/jesus.mp3",                        duration: 34 },
-        { title: "20% OFF LIMITED EDITION SHIT BOWLS at SHIT PUDDLE GARY'S SHIT FARM",                 artist: "Shit Puddle Gary's Shit Far",       cover: "covers/radio23.jpg", src: "audio/garyfarm.mp3",                        duration: 36 },
-        { title: "Blaze and Glory",                         artist: "17 Months", cover: "covers/radio19.jpg", src: "audio/Blaze and Glory.mp3",                                duration: 166 },
-        { title: "Rupert Is Gay",                           artist: "17 Months", cover: "covers/radio9.jpg",  src: "audio/Rupert Is Gay.mp3",                                  duration: 239 },
-        { title: "Heroes", artist: "David Bowie", cover: "covers/radio26.jpg", src: "audio/heroes.mp3", duration: 371 },
-        { title: "Not A Virgin Anymore!",                   artist: "17 Months", cover: "covers/radio1.jpg",  src: "audio/Not A Virgin Anymore!.mp3",                          duration: 186 },
-        { title: "The Tortured Poets Department",                     artist: "Taylor Swift", cover: "covers/radio29.jpg",  src: "audio/ttpd.mp3",                            duration: 293 },
-        { title: "Backshots In The Garage",                 artist: "ERM",       cover: "covers/radio18.jpg", src: "audio/Backshots In The Garage.mp3",                        duration: 209 },
-        { title: "We've Got Rupert",                        artist: "17 Months", cover: "covers/radio5.jpg",  src: "audio/We've Got Rupert.mp3",                               duration: 180 },
-        { title: "I Want To Go To Atlantis",                artist: "The Chart of Consequences", cover: "covers/radio17.jpg", src: "audio/I Want To Go To Atlantis.mp3",       duration: 54  },
-        { title: "Bells-a-Hop",                 artist: "Olivia Anne",       cover: "covers/radio22.jpg", src: "audio/Bells a hop.mp3",                        duration: 213 },
-        { title: "Raven, Let's Get Married!",               artist: "17 Months", cover: "covers/radio4.jpg",  src: "audio/Raven, Let's Get Married!.mp3",                      duration: 213 },
-        { title: "The Jenksquad Anthem",                    artist: "17 Months", cover: "covers/radio20.jpg", src: "audio/The Jenksquad Anthem.mp3",                           duration: 65  },
-        { title: "Stefanie's Pregnant (Andy, What Did You Do?)", artist: "17 Months", cover: "covers/radio3.jpg", src: "audio/Stefanie's Pregnant (Andy, What Did You Do_).mp3", duration: 239 },
-        { title: "I Turned Into A Pterodactyl",             artist: "17 Months", cover: "covers/radio11.jpg", src: "audio/Pterodactyl Smoothie.mp3",                           duration: 165 },
-        { title: "Me and Michael",               artist: "MGMT", cover: "covers/radio25.jpg",  src: "audio/michael.mp3",                      duration: 290 },
-        { title: "Addicted To The 'Pedia",                  artist: "17 Months", cover: "covers/radio12.jpg", src: "audio/Addicted To The 'Pedia.mp3",                         duration: 198 },
-        { title: "The Death of Jenkins",                    artist: "17 Months", cover: "covers/radio10.jpg", src: "audio/The Death of Jenkins.mp3",                           duration: 234 },
-        { title: "I'd Leave My Parents' Basement For You",  artist: "17 Months", cover: "covers/radio15.jpg", src: "audio/17 Months - I'd Leave My Parents' Basement For You 2.mp3", duration: 221 },
-        { title: "Upside Down",                                 artist: "Diana Ross", cover: "covers/radio31.jpg", src: "audio/upsidedown.mp3",                        duration: 245  },
-        { title: "Perched",                                 artist: "The Chart of Consequences", cover: "covers/radio16.jpg", src: "audio/Perched.mp3",                        duration: 43  },
-        { title: "Money Magnet",                            artist: "Ksenia Angel", cover: "covers/radio21.jpg", src: "audio/Money Magnet.mp3",                        duration: 167  },
-        { title: "Last Strike",                             artist: "17 Months", cover: "covers/radio8.jpg",  src: "audio/Last Strike.mp3",                                    duration: 210 },
-        { title: "The First I Love You",                             artist: "Kyle Dixon & Michael Stein", cover: "covers/radio30.jpg",  src: "audio/iloveyou.mp3",                                    duration: 146 },
-        { title: "What Happens In Vegas, Stays In Vegas",   artist: "17 Months", cover: "covers/radio2.jpg",  src: "audio/What Happens In Vegas, Stays In Vegas.mp3",          duration: 208 },
-        { title: "I'm Not An Incel",                        artist: "17 Months", cover: "covers/radio14.jpg", src: "audio/17 Months - I'm Not An Incel.mp3",                   duration: 169 },
-        { title: "Jenkins, Is That Cocaine?",               artist: "17 Months", cover: "covers/radio6.jpg",  src: "audio/Jenkins, Is That Cocaine_.mp3",                      duration: 162 },
-        { title: "It's Time To Leave",                      artist: "17 Months", cover: "covers/radio13.jpg", src: "audio/17 Months - It's Time To Leave.mp3",                 duration: 238 },
-        { title: "Thanksgiving Dinner",                     artist: "17 Months", cover: "covers/radio7.jpg",  src: "audio/Thanksgiving Dinner.mp3",                            duration: 182 },
-        { title: "Objection!",                     artist: "Finn Wolfhard", cover: "covers/radio28.jpg",  src: "audio/objection.mp3",                            duration: 169 },
-
-        // BLOCK B
-        { title: "GET YOUR MATRESS AT SLEEP COUNTRY TODAY!",                 artist: "Sleep Country",       cover: "covers/radio27.jpg", src: "audio/sleep.mp3",                        duration: 68 },
-        { title: "JOIN US TODAY AT THE CHURCH OF ATLANTIS!",                 artist: "The Church of Atlantis",       cover: "covers/radio24.jpg", src: "audio/jesus.mp3",                        duration: 34 },
-        { title: "20% OFF LIMITED EDITION SHIT BOWLS at SHIT PUDDLE GARY'S SHIT FARM",                 artist: "Shit Puddle Gary's Shit Far",       cover: "covers/radio23.jpg", src: "audio/garyfarm.mp3",                        duration: 36 },
-        { title: "Bells-a-Hop",                 artist: "Olivia Anne",       cover: "covers/radio22.jpg", src: "audio/Bells a hop.mp3",                        duration: 213 },
-        { title: "We've Got Rupert",                        artist: "17 Months", cover: "covers/radio5.jpg",  src: "audio/We've Got Rupert.mp3",                               duration: 180 },
-        { title: "The First I Love You",                             artist: "Kyle Dixon & Michael Stein", cover: "covers/radio30.jpg",  src: "audio/iloveyou.mp3",                                    duration: 146 },
-        { title: "The Death of Jenkins",                    artist: "17 Months", cover: "covers/radio10.jpg", src: "audio/The Death of Jenkins.mp3",                           duration: 234 },
-        { title: "Heroes", artist: "David Bowie", cover: "covers/radio26.jpg", src: "audio/heroes.mp3", duration: 371 },
-        { title: "Me and Michael",               artist: "MGMT", cover: "covers/radio25.jpg",  src: "audio/michael.mp3",                      duration: 290 },
-        { title: "Blaze and Glory",                         artist: "17 Months", cover: "covers/radio19.jpg", src: "audio/Blaze and Glory.mp3",                                duration: 166 },
-        { title: "Perched",                                 artist: "The Chart of Consequences", cover: "covers/radio16.jpg", src: "audio/Perched.mp3",                        duration: 43  },
-        { title: "Addicted To The 'Pedia",                  artist: "17 Months", cover: "covers/radio12.jpg", src: "audio/Addicted To The 'Pedia.mp3",                         duration: 198 },
-        { title: "Upside Down",                                 artist: "Diana Ross", cover: "covers/radio31.jpg", src: "audio/upsidedown.mp3",                        duration: 245  },
-        { title: "Raven, Let's Get Married!",               artist: "17 Months", cover: "covers/radio4.jpg",  src: "audio/Raven, Let's Get Married!.mp3",                      duration: 213 },
-        { title: "I'd Leave My Parents' Basement For You",  artist: "17 Months", cover: "covers/radio15.jpg", src: "audio/17 Months - I'd Leave My Parents' Basement For You 2.mp3", duration: 221 },
-        { title: "Backshots In The Garage",                 artist: "ERM",       cover: "covers/radio18.jpg", src: "audio/Backshots In The Garage.mp3",                        duration: 209 },
-        { title: "Jenkins, Is That Cocaine?",               artist: "17 Months", cover: "covers/radio6.jpg",  src: "audio/Jenkins, Is That Cocaine_.mp3",                      duration: 162 },
-        { title: "Rupert Is Gay",                           artist: "17 Months", cover: "covers/radio9.jpg",  src: "audio/Rupert Is Gay.mp3",                                  duration: 239 },
-        { title: "Objection!",                     artist: "Finn Wolfhard", cover: "covers/radio28.jpg",  src: "audio/objection.mp3",                            duration: 169 },
-        { title: "Stefanie's Pregnant (Andy, What Did You Do?)", artist: "17 Months", cover: "covers/radio3.jpg", src: "audio/Stefanie's Pregnant (Andy, What Did You Do_).mp3", duration: 239 },
-        { title: "I Turned Into A Pterodactyl",             artist: "17 Months", cover: "covers/radio11.jpg", src: "audio/Pterodactyl Smoothie.mp3",                           duration: 165 },
-        { title: "The Jenksquad Anthem",                    artist: "17 Months", cover: "covers/radio20.jpg", src: "audio/The Jenksquad Anthem.mp3",                           duration: 65  },
-        { title: "Last Strike",                             artist: "17 Months", cover: "covers/radio8.jpg",  src: "audio/Last Strike.mp3",                                    duration: 210 },
-        { title: "Not A Virgin Anymore!",                   artist: "17 Months", cover: "covers/radio1.jpg",  src: "audio/Not A Virgin Anymore!.mp3",                          duration: 186 },
-        { title: "What Happens In Vegas, Stays In Vegas",   artist: "17 Months", cover: "covers/radio2.jpg",  src: "audio/What Happens In Vegas, Stays In Vegas.mp3",          duration: 208 },
-        { title: "It's Time To Leave",                      artist: "17 Months", cover: "covers/radio13.jpg", src: "audio/17 Months - It's Time To Leave.mp3",                 duration: 238 },
-        { title: "I Want To Go To Atlantis",                artist: "The Chart of Consequences", cover: "covers/radio17.jpg", src: "audio/I Want To Go To Atlantis.mp3",       duration: 54  },
-        { title: "Thanksgiving Dinner",                     artist: "17 Months", cover: "covers/radio7.jpg",  src: "audio/Thanksgiving Dinner.mp3",                            duration: 182 },
-        { title: "The Tortured Poets Department",                     artist: "Taylor Swift", cover: "covers/radio29.jpg",  src: "audio/ttpd.mp3",                            duration: 293 },
-        { title: "Money Magnet",                            artist: "Ksenia Angel", cover: "covers/radio21.jpg", src: "audio/Money Magnet.mp3",                        duration: 167  },
-        { title: "I'm Not An Incel",                        artist: "17 Months", cover: "covers/radio14.jpg", src: "audio/17 Months - I'm Not An Incel.mp3",                   duration: 169 },
-
-        // BLOCK C
-        { title: "GET YOUR MATRESS AT SLEEP COUNTRY TODAY!",                 artist: "Sleep Country",       cover: "covers/radio27.jpg", src: "audio/sleep.mp3",                        duration: 68 },
-        { title: "20% OFF LIMITED EDITION SHIT BOWLS at SHIT PUDDLE GARY'S SHIT FARM",                 artist: "Shit Puddle Gary's Shit Far",       cover: "covers/radio23.jpg", src: "audio/garyfarm.mp3",                        duration: 36 },
-        { title: "Upside Down",                                 artist: "Diana Ross", cover: "covers/radio31.jpg", src: "audio/upsidedown.mp3",                        duration: 245  },
-        { title: "Backshots In The Garage",                 artist: "ERM",       cover: "covers/radio18.jpg", src: "audio/Backshots In The Garage.mp3",                        duration: 209 },
-        { title: "The Death of Jenkins",                    artist: "17 Months", cover: "covers/radio10.jpg", src: "audio/The Death of Jenkins.mp3",                           duration: 234 },
-        { title: "I Want To Go To Atlantis",                artist: "The Chart of Consequences", cover: "covers/radio17.jpg", src: "audio/I Want To Go To Atlantis.mp3",       duration: 54  },
-        { title: "The Jenksquad Anthem",                    artist: "17 Months", cover: "covers/radio20.jpg", src: "audio/The Jenksquad Anthem.mp3",                           duration: 65  },
-        { title: "Rupert Is Gay",                           artist: "17 Months", cover: "covers/radio9.jpg",  src: "audio/Rupert Is Gay.mp3",                                  duration: 239 },
-        { title: "The Tortured Poets Department",                     artist: "Taylor Swift", cover: "covers/radio29.jpg",  src: "audio/ttpd.mp3",                            duration: 293 },
-        { title: "Blaze and Glory",                         artist: "17 Months", cover: "covers/radio19.jpg", src: "audio/Blaze and Glory.mp3",                                duration: 166 },
-        { title: "Bells-a-Hop",                 artist: "Olivia Anne",       cover: "covers/radio22.jpg", src: "audio/Bells a hop.mp3",                        duration: 213 },
-        { title: "I'd Leave My Parents' Basement For You",  artist: "17 Months", cover: "covers/radio15.jpg", src: "audio/17 Months - I'd Leave My Parents' Basement For You 2.mp3", duration: 221 },
-        { title: "Not A Virgin Anymore!",                   artist: "17 Months", cover: "covers/radio1.jpg",  src: "audio/Not A Virgin Anymore!.mp3",                          duration: 186 },
-        { title: "Addicted To The 'Pedia",                  artist: "17 Months", cover: "covers/radio12.jpg", src: "audio/Addicted To The 'Pedia.mp3",                         duration: 198 },
-        { title: "Perched",                                 artist: "The Chart of Consequences", cover: "covers/radio16.jpg", src: "audio/Perched.mp3",                        duration: 43  },
-        { title: "Money Magnet",                            artist: "Ksenia Angel", cover: "covers/radio21.jpg", src: "audio/Money Magnet.mp3",                        duration: 167  },
-        { title: "We've Got Rupert",                        artist: "17 Months", cover: "covers/radio5.jpg",  src: "audio/We've Got Rupert.mp3",                               duration: 180 },
-        { title: "Last Strike",                             artist: "17 Months", cover: "covers/radio8.jpg",  src: "audio/Last Strike.mp3",                                    duration: 210 },
-        { title: "The First I Love You",                             artist: "Kyle Dixon & Michael Stein", cover: "covers/radio30.jpg",  src: "audio/iloveyou.mp3",                                    duration: 146 },
-        { title: "I Turned Into A Pterodactyl",             artist: "17 Months", cover: "covers/radio11.jpg", src: "audio/Pterodactyl Smoothie.mp3",                           duration: 165 },
-        { title: "Stefanie's Pregnant (Andy, What Did You Do?)", artist: "17 Months", cover: "covers/radio3.jpg", src: "audio/Stefanie's Pregnant (Andy, What Did You Do_).mp3", duration: 239 },
-        { title: "Heroes", artist: "David Bowie", cover: "covers/radio26.jpg", src: "audio/heroes.mp3", duration: 371 },
-        { title: "What Happens In Vegas, Stays In Vegas",   artist: "17 Months", cover: "covers/radio2.jpg",  src: "audio/What Happens In Vegas, Stays In Vegas.mp3",          duration: 208 },
-        { title: "Objection!",                     artist: "Finn Wolfhard", cover: "covers/radio28.jpg",  src: "audio/objection.mp3",                            duration: 169 },
-        { title: "Jenkins, Is That Cocaine?",               artist: "17 Months", cover: "covers/radio6.jpg",  src: "audio/Jenkins, Is That Cocaine_.mp3",                      duration: 162 },
-        { title: "It's Time To Leave",                      artist: "17 Months", cover: "covers/radio13.jpg", src: "audio/17 Months - It's Time To Leave.mp3",                 duration: 238 },
-        { title: "I'm Not An Incel",                        artist: "17 Months", cover: "covers/radio14.jpg", src: "audio/17 Months - I'm Not An Incel.mp3",                   duration: 169 },
-        { title: "Thanksgiving Dinner",                     artist: "17 Months", cover: "covers/radio7.jpg",  src: "audio/Thanksgiving Dinner.mp3",                            duration: 182 },
-        { title: "Me and Michael",               artist: "MGMT", cover: "covers/radio25.jpg",  src: "audio/michael.mp3",                      duration: 290 },
-        { title: "Raven, Let's Get Married!",               artist: "17 Months", cover: "covers/radio4.jpg",  src: "audio/Raven, Let's Get Married!.mp3",                      duration: 213 }
+        { title: "The Theme of an Unsinister Workplace", artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/01 The Theme of an Unsinister Workplace.m4a", duration: 80 },
+        { title: "Trustworthy",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/02 Trustworthy.m4a",                        duration: 77 },
+        { title: "THEALIENSAREHERE",                   artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/03 THEALIENSAREHERE.m4a",                   duration: 83 },
+        { title: "Winter Playground",                  artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/04 Winter Playground.m4a",                  duration: 73 },
+        { title: "Irish Sea Creature",                 artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/05 Irish Sea Creature.m4a",                 duration: 76 },
+        { title: "Angelic",                            artist: "Crazycat",          cover: "covers/Error 410.png", src: "audio/SpotiDownloader.com - Angelic - Crazycat.mp3", duration: 83 },
+        { title: "???",                                artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/07 ___.mp3",                                duration: 65 },
+        { title: "Warp",                               artist: "Crazycat",          cover: "covers/Error 410.png", src: "audio/SpotiDownloader.com - Warp - Crazycat.mp3",    duration: 92 },
+        { title: "Sponge",                             artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/09 Sponge.m4a",                             duration: 76 },
+        { title: "CCTV",                               artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/10 CCTV.m4a",                               duration: 83 },
+        { title: "Altostratus",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/11 Altostratus.m4a",                        duration: 65 },
+        { title: "Flashback",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Flashback.mp3",                             duration: 169 },
+        { title: "Hallucination",                      artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Hallucination.mp3",                         duration: 133 },
+        { title: "Pause",                              artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/14 Pause.mp3",                              duration: 107 },
+        { title: "Dance Moves",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Dance Moves.mp3",                           duration: 87 },
+        { title: "Error 410",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/16 Error 410.m4a",                          duration: 104 },
+        { title: "Don't Unplug The Arcade Machine",    artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/17 Don't Unplug The Arcade Machine 1.m4a",  duration: 71 }
     ];
 
     const player = document.getElementById('radio-player');
