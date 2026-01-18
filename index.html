@@ -537,7 +537,7 @@
             <div class="left-column">
                 <div class="radio-header">
                     <div class="header-top">92.3 FM: HGSR</div>
-                    <h1 class="header-main">Happy Guys Studio</h1>
+                    <h1 class="header-main">Happy Guys Studio Radio</h1>
                 </div>
 
                 <div class="main-cover">
@@ -601,46 +601,28 @@
 
     // 1. PLAYLIST
     const playlist = [
-        // --- CRAZYCAT BLOCK ---
-        { title: "The Theme of an Unsinister Workplace", artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/01 The Theme of an Unsinister Workplace.m4a", duration: 80 },
-        { title: "Trustworthy",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/02 Trustworthy.m4a",                        duration: 77 },
-        { title: "THEALIENSAREHERE",                   artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/03 THEALIENSAREHERE.m4a",                   duration: 83 },
-        { title: "Winter Playground",                  artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/04 Winter Playground.m4a",                  duration: 73 },
-        { title: "Irish Sea Creature",                 artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/05 Irish Sea Creature.m4a",                 duration: 76 },
-        { title: "Angelic",                            artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/SpotiDownloader.com - Angelic - Crazycat.mp3", duration: 83 },
-        { title: "???",                                artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/07 ___.mp3",                                duration: 65 },
-        { title: "Warp",                               artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/SpotiDownloader.com - Warp - Crazycat.mp3",    duration: 92 },
-        { title: "Sponge",                             artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/09 Sponge.m4a",                             duration: 76 },
-        { title: "CCTV",                               artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/10 CCTV.m4a",                               duration: 83 },
-        { title: "Altostratus",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/11 Altostratus.m4a",                        duration: 65 },
-        { title: "Flashback",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Flashback.mp3",                             duration: 169 },
-        { title: "Hallucination",                      artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Hallucination.mp3",                         duration: 133 },
-        { title: "Pause",                              artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/14 Pause.mp3",                              duration: 107 },
-        { title: "Dance Moves",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Dance Moves.mp3",                           duration: 87 },
-        { title: "Error 410",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/16 Error 410.m4a",                          duration: 104 },
-        { title: "Don't Unplug The Arcade Machine",    artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/17 Don't Unplug The Arcade Machine 1.m4a",  duration: 71 },
-        
-        // --- PEASINAPOD BLOCK ---
-        { title: "Introduction To Quantum Mechanics", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/01 Introduction To Quantum Mechanics.m4a", duration: 43 },
-        { title: "Giant Frog", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/02 Giant Frog.m4a", duration: 143 },
-        { title: "The Paper Making Facility", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/03 The Paper Making Facility.m4a", duration: 120 },
-        { title: "Hey Babe, Did You Put Salt In The Water?", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/04 Hey Babe, Did You Put Salt In The Water_.m4a", duration: 43 },
-        { title: "You Are Dead Now (Fruit Fly)", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/05 You Are Dead Now (Fruit Fly).m4a", duration: 159 },
-        { title: "Fro-Yo Coupon", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/06 Fro-Yo Coupon.m4a", duration: 144 },
-        { title: "Sunscreen", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/07 Sunscreen.m4a", duration: 61 },
-        { title: "The Peas In The Garden Are Eating My Grandma", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/08 The Peas In The Garden Are Eating My Grandma.m4a", duration: 79 },
-        { title: "I Was Just Trying To Turn Up The Sound And It Went Back To Android", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/09 I Was Just Trying To Turn Up The Sound And It Went Back To Android.wav", duration: 42 },
-        { title: "I'm So Glad That Chair Is Still Here (There's A Hole)", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/10 I'm So Glad That Chair Is Still Here (There's A Hole).m4a", duration: 105 },
-        { title: "The Refund", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/11 The Refund.m4a", duration: 113 },
-        { title: "The Popcorn's Not Popping (feat. Anna Quinlan of The Recess Monkeys)", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/12 The Popcorn's Not Popping.m4a", duration: 85 },
-        { title: "Crash Into The Wall", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/13 Crash Into The Wall.m4a", duration: 49 },
-        { title: "Are You Ready To Be Buried Alive?", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/14 Are You Ready To Be Buried Alive_.wav", duration: 70 },
-        { title: "I Warned You The Bacon Was Hot", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/15 I Warned You The Bacon Was Hot.wav", duration: 49 },
-        { title: "Buttons", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/16 Buttons.wav", duration: 71 },
-        { title: "37.5", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/17 37.5.wav", duration: 137 },
-        { title: "If You See Something, Say Something", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/18 If You See Something, Say Something.wav", duration: 148 },
-        { title: "There Was Once A Cow", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/19 There Was Once A Cow.wav", duration: 79 },
-        { title: "I Just Telepathically Knew That My Laundry Done", artist: "PEASINAPOD", cover: "covers/LITTLE SHOOTS.jpg", src: "audio/20 I Just Telepathically Knew That My Laundry Done.wav", duration: 80 },
+        // --- CRAZYCAT BLOCK (Updated with new tracks and cover logic) ---
+        { title: "Lime", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Lime.mp3", duration: 68 },
+        { title: "balloon", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/balloon.mp3", duration: 80 },
+        { title: "Underground", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Underground.mp3", duration: 114 },
+        { title: "Back In Time", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Back In Time.mp3", duration: 69 },
+        { title: "Sting", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Sting.mp3", duration: 197 },
+        { title: "Burn", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Burn.mp3", duration: 105 },
+        { title: "Lakeside", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Lakeside.mp3", duration: 161 },
+        { title: "Popcorn", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Popcorn.mp3", duration: 142 },
+        { title: "Casual", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Casual.mp3", duration: 136 },
+        { title: "Telephone", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Telephone.mp3", duration: 129 },
+        { title: "Downtown", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Downtown.mp3", duration: 83 },
+        { title: "Diamonds", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Diamonds.mp3", duration: 144 },
+        { title: "Midnight Party", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Midnight Party.mp3", duration: 64 },
+        { title: "Drama", artist: "Crazycat", cover: "covers/popcorn.jpg", src: "audio/Drama.mp3", duration: 131 },
+        { title: "Deluxe", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Deluxe.mp3", duration: 122 },
+        { title: "Haunted", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Haunted.mp3", duration: 93 },
+        { title: "Black and White Dancefloor", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Black and White Dancefloor.mp3", duration: 62 },
+        { title: "eighteen", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/eighteen.mp3", duration: 183 },
+        { title: "problems", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/problems.mp3", duration: 153 },
+        { title: "Daydream", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/Daydream.mp3", duration: 164 },
+        { title: "9 PM", artist: "Crazycat", cover: "covers/popcorn2.jpg", src: "audio/9 PM.mp3", duration: 79 },
     ];
 
     const player = document.getElementById('radio-player');
