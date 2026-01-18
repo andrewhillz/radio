@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Guys Studio Radio (92.3 FM: HGSR)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #18181b;        
+            --bg-queue: #27272a;       
+            --text-main: #ffffff;      
+            --text-sub: #a1a1aa;       
+            --accent-red: #ef4444;     
+            --btn-bg: #ffffff;         
+            --btn-icon: #000000;       
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
+            margin: 0;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .radio-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 0;
+            background: transparent;
+        }
+
+        .player-body {
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* NEW HEADER STYLES */
+        .radio-header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333; /* The separator line */
+        }
+
+        .header-top {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .header-main {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-main);
+            margin: 0;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .main-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: transparent; 
+            border-radius: 0;
+            box-shadow: none; 
+            margin-bottom: 25px;
+            display: flex; 
+            position: relative;
+        }
+
+        .main-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .track-info {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .track-info h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .track-info p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .controls-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .play-btn {
+            background: var(--btn-bg);
+            color: var(--btn-icon);
+            border: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: none;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            background: #f4f4f5;
+        }
+
+        .play-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: black; 
+        }
+
+        #icon-stop { display: none; }
+        .playing #icon-play { display: none; }
+        .playing #icon-stop { display: block; }
+
+        /* STATUS & VISUALIZER CONTAINER */
+        .status-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .status-label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .status-label.paused {
+            color: var(--text-sub); 
+        }
+
+        /* AUDIO VISUALIZER BARS */
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 14px;
+        }
+
+        .bar {
+            width: 4px;
+            background-color: var(--accent-red);
+            height: 3px;
+            border-radius: 2px;
+            animation: bounce 0.6s infinite ease-in-out;
+            animation-play-state: paused;
+            transition: background-color 0.3s;
+        }
+
+        /* Different animation speeds for randomness */
+        .bar:nth-child(1) { animation-duration: 0.5s; }
+        .bar:nth-child(2) { animation-duration: 0.7s; }
+        .bar:nth-child(3) { animation-duration: 0.4s; }
+        .bar:nth-child(4) { animation-duration: 0.6s; }
+
+        @keyframes bounce {
+            0%, 100% { height: 3px; }
+            50% { height: 14px; }
+        }
+
+        /* Active State */
+        .visualizer.active .bar {
+            animation-play-state: running;
+        }
+        
+        /* Paused State (Turn bars grey) */
+        .visualizer.paused .bar {
+            background-color: var(--text-sub);
+            height: 3px !important; /* Force flat when paused */
+        }
+
+        /* Queue / Up Next */
+        .queue-section {
+            border-top: 1px solid #333;
+            padding-top: 25px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .queue-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #52525b; 
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .queue-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            background: var(--bg-queue);
+            padding: 12px;
+            border-radius: 0; 
+            transition: background 0.2s;
+        }
+        
+        .queue-item:hover {
+            background: #3f3f46;
+        }
+
+        .mini-thumb {
+            width: 48px;
+            height: 48px;
+            border-radius: 0; /* Square */
+            background: #333;
+            margin-right: 15px;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .mini-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .mini-title { 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            color: var(--text-main); 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            margin-bottom: 4px;
+        }
+        
+        .mini-artist { 
+            color: var(--text-sub); 
+            font-size: 0.8rem; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="radio-container">
+    <div class="player-body">
+        
+        <div class="radio-header">
+            <div class="header-top">92.3 FM: HGSR</div>
+            <h1 class="header-main">Happy Guys Studio Radio</h1>
+        </div>
+
+        <div class="main-cover">
+            <img id="main-art" src="" alt="Album Art" style="display:none;">
+        </div>
+
+        <div class="track-info">
+            <h2 id="track-title">Connecting...</h2>
+            <p id="artist-name">Happy Guys Studio Radio</p>
+        </div>
+
+        <div class="controls-wrapper">
+            <button class="play-btn" id="play-btn">
+                <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="icon-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+            </button>
+            
+            <div class="status-wrapper">
+                <div class="visualizer paused" id="visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="status-label paused" id="status-label">PAUSED</div>
+            </div>
+        </div>
+
+        <div class="queue-section">
+            <div class="queue-label">Up Next</div>
+            <div class="queue-item" id="next-item">
+                <img class="mini-thumb" id="next-art" src="">
+                <div class="mini-info">
+                    <span class="mini-title" id="next-title">...</span>
+                    <span class="mini-artist" id="next-artist">...</span>
+                </div>
+            </div>
+            
+             <div class="queue-label">Previously</div>
+            <div class="queue-item" id="prev-item">
+                <img class="mini-thumb" id="prev-art" src="">
+                <div class="mini-info">
+                    <span class="mini-title" id="prev-title">...</span>
+                    <span class="mini-artist" id="prev-artist">...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="radio-player" preload="auto"></audio>
+</div>
+
+<script>
+    // 0. GLOBAL TIME SYNC VARIABLES
+    let serverTimeOffset = 0; 
+
+    // 1. NEW PLAYLIST
+    // Note: I have assumed your audio files are in a folder named 'audio'
+    // and your cover image is in a folder named 'covers'.
+    const playlist = [
+        { title: "The Theme of an Unsinister Workplace", artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/01 The Theme of an Unsinister Workplace.m4a", duration: 80 },
+        { title: "Trustworthy",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/02 Trustworthy.m4a",                        duration: 77 },
+        { title: "THEALIENSAREHERE",                   artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/03 THEALIENSAREHERE.m4a",                   duration: 83 },
+        { title: "Winter Playground",                  artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/04 Winter Playground.m4a",                  duration: 73 },
+        { title: "Irish Sea Creature",                 artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/05 Irish Sea Creature.m4a",                 duration: 76 },
+        { title: "Angelic",                            artist: "Crazycat",          cover: "covers/Error 410.png", src: "audio/SpotiDownloader.com - Angelic - Crazycat.mp3", duration: 83 },
+        { title: "???",                                artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/07 ___.mp3",                                duration: 65 },
+        { title: "Warp",                               artist: "Crazycat",          cover: "covers/Error 410.png", src: "audio/SpotiDownloader.com - Warp - Crazycat.mp3",    duration: 92 },
+        { title: "Sponge",                             artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/09 Sponge.m4a",                             duration: 76 },
+        { title: "CCTV",                               artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/10 CCTV.m4a",                               duration: 83 },
+        { title: "Altostratus",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/11 Altostratus.m4a",                        duration: 65 },
+        { title: "Flashback",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Flashback.mp3",                             duration: 169 },
+        { title: "Hallucination",                      artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Hallucination.mp3",                         duration: 133 },
+        { title: "Pause",                              artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/14 Pause.mp3",                              duration: 107 },
+        { title: "Dance Moves",                        artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/Dance Moves.mp3",                           duration: 87 },
+        { title: "Error 410",                          artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/16 Error 410.m4a",                          duration: 104 },
+        { title: "Don't Unplug The Arcade Machine",    artist: "Crazycat", cover: "covers/Error 410.png", src: "audio/17 Don't Unplug The Arcade Machine 1.m4a",  duration: 71 }
+    ];
+
+    const player = document.getElementById('radio-player');
+    const playBtn = document.getElementById('play-btn');
+    const statusLabel = document.getElementById('status-label');
+    const visualizer = document.getElementById('visualizer');
+
+    // UI Elements
+    const mainArt = document.getElementById('main-art');
+    const mainTitle = document.getElementById('track-title');
+    const mainArtist = document.getElementById('artist-name');
+    
+    // Mini Player Elements
+    const prevTitle = document.getElementById('prev-title');
+    const prevArtist = document.getElementById('prev-artist');
+    const prevArt = document.getElementById('prev-art');
+    
+    const nextTitle = document.getElementById('next-title');
+    const nextArtist = document.getElementById('next-artist');
+    const nextArt = document.getElementById('next-art');
+
+    const totalDuration = playlist.reduce((acc, track) => acc + track.duration, 0);
+
+    // 2. SERVER TIME SYNC FUNCTION
+    async function syncToGlobalTime() {
+        try {
+            const response = await fetch(window.location.href, { method: 'HEAD' });
+            const serverDateStr = response.headers.get('Date');
+            
+            if (serverDateStr) {
+                const serverTime = new Date(serverDateStr).getTime();
+                const localTime = Date.now();
+                serverTimeOffset = (serverTime - localTime) / 1000; 
+                console.log("Synced to server time. Offset (sec):", serverTimeOffset);
+            }
+        } catch (err) {
+            console.log("Could not sync to server time. Using local time.", err);
+        }
+    }
+
+    function updateMediaSession(track) {
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: `${track.title} - ${track.artist}`,
+                artist: "92.3 FM: HGSR",
+                artwork: [
+                    { src: track.cover, sizes: '512x512', type: 'image/jpeg' }
+                ]
+            });
+            
+            navigator.mediaSession.setActionHandler('play', () => { 
+                togglePlayState(true);
+            });
+            navigator.mediaSession.setActionHandler('pause', () => { 
+                togglePlayState(false);
+            });
+        }
+    }
+
+    // Consolidated Play/Pause Logic
+    function togglePlayState(shouldPlay) {
+        if (shouldPlay) {
+            syncRadio(); // Resync before playing
+            player.play().catch(e => console.log("Playback error", e));
+            playBtn.classList.add('playing');
+            statusLabel.innerText = "LIVE";
+            statusLabel.classList.remove('paused');
+            visualizer.classList.add('active');
+            visualizer.classList.remove('paused');
+        } else {
+            player.pause();
+            playBtn.classList.remove('playing');
+            statusLabel.innerText = "PAUSED";
+            statusLabel.classList.add('paused');
+            visualizer.classList.remove('active');
+            visualizer.classList.add('paused');
+        }
+    }
+
+    function syncRadio() {
+        const now = Math.floor((Date.now() / 1000) + serverTimeOffset); 
+        
+        let currentPosition = now % totalDuration;
+        let timeAccumulator = 0;
+        
+        for (let i = 0; i < playlist.length; i++) {
+            let track = playlist[i];
+
+            if (currentPosition < timeAccumulator + track.duration) {
+                const seekTime = currentPosition - timeAccumulator;
+                
+                const rawSrc = player.getAttribute('src');
+                const currentSrc = rawSrc ? decodeURIComponent(rawSrc.split('/').pop()) : "";
+                const newSrc = decodeURIComponent(track.src.split('/').pop());
+
+                if (currentSrc !== newSrc) {
+                    player.src = track.src;
+                    player.load();
+                    player.currentTime = seekTime;
+                    
+                    mainTitle.innerText = track.title;
+                    mainArtist.innerText = track.artist;
+                    mainArt.src = track.cover;
+                    mainArt.style.display = 'block';
+
+                    updateMediaSession(track);
+
+                    let prevIndex = (i === 0) ? playlist.length - 1 : i - 1;
+                    let nextIndex = (i === playlist.length - 1) ? 0 : i + 1;
+
+                    let prevTrack = playlist[prevIndex];
+                    let nextTrack = playlist[nextIndex];
+
+                    prevTitle.innerText = prevTrack.title;
+                    prevArtist.innerText = prevTrack.artist;
+                    prevArt.src = prevTrack.cover;
+
+                    nextTitle.innerText = nextTrack.title;
+                    nextArtist.innerText = nextTrack.artist;
+                    nextArt.src = nextTrack.cover;
+                    
+                    if(playBtn.classList.contains('playing')) {
+                        player.play().catch(e => console.log("Playback prevented:", e));
+                    }
+                } else {
+                    if (Math.abs(player.currentTime - seekTime) > 2) {
+                        player.currentTime = seekTime;
+                    }
+                }
+                return;
+            }
+            timeAccumulator += track.duration;
+        }
+    }
+
+    // 4. INITIALIZE
+    syncToGlobalTime().then(() => {
+        setInterval(syncRadio, 1000);
+        
+        // Initialize UI as Paused
+        statusLabel.innerText = "PAUSED";
+        statusLabel.classList.add('paused');
+        visualizer.classList.add('paused');
+        syncRadio();
+    });
+
+    playBtn.addEventListener('click', () => {
+        const isPlaying = playBtn.classList.contains('playing');
+        togglePlayState(!isPlaying);
+    });
+
+</script>
+
+</body>
+</html>
