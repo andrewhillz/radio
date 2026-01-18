@@ -182,6 +182,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            /* Zoom animation removed */
         }
 
         .track-info h2 {
@@ -259,7 +260,6 @@
             display: flex;
             align-items: center;
             background: var(--bg-queue);
-            /* Glassy backdrop filter for image themes */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 14px;
@@ -537,7 +537,7 @@
             <div class="left-column">
                 <div class="radio-header">
                     <div class="header-top">92.3 FM: HGSR</div>
-                    <h1 class="header-main">Happy Guys Studio Radio</h1>
+                    <h1 class="header-main">Happy Guys Studio</h1>
                 </div>
 
                 <div class="main-cover">
@@ -781,15 +781,34 @@
             let track = playlist[i];
             if (currentPosition < timeAccumulator + track.duration) {
                 const seekTime = currentPosition - timeAccumulator;
+                
+                // --- GLITCH FIX LOGIC ---
+                // We don't just set player.src immediately if it's already playing.
                 const rawSrc = player.getAttribute('src');
                 const currentSrc = rawSrc ? decodeURIComponent(rawSrc.split('/').pop()) : "";
                 const newSrc = decodeURIComponent(track.src.split('/').pop());
 
                 if (currentSrc !== newSrc) {
-                    player.src = track.src;
-                    player.load();
-                    player.currentTime = seekTime;
+                    const wasPlaying = !player.paused;
                     
+                    player.src = track.src;
+                    
+                    // Wait for metadata to load before seeking to prevent "glitch" noise
+                    player.addEventListener('loadedmetadata', () => {
+                         // Only seek if we are substantially into the song (skip first 0.5s)
+                         if (seekTime > 0.5) {
+                             player.currentTime = seekTime;
+                         }
+                         
+                         if (wasPlaying || playBtn.classList.contains('playing')) {
+                             var playPromise = player.play();
+                             if (playPromise !== undefined) {
+                                 playPromise.catch(error => { console.log("Auto-play prevented"); });
+                             }
+                         }
+                    }, { once: true });
+                    
+                    // UI Updates
                     mainTitle.innerText = track.title;
                     mainArtist.innerText = track.artist;
                     mainArt.src = track.cover;
@@ -807,12 +826,10 @@
                     nextTitle.innerText = playlist[nextIndex].title;
                     nextArtist.innerText = playlist[nextIndex].artist;
                     nextArt.src = playlist[nextIndex].cover;
-                    
-                    if(playBtn.classList.contains('playing')) {
-                        player.play().catch(e => console.log("Playback prevented:", e));
-                    }
+                
                 } else {
-                    if (Math.abs(player.currentTime - seekTime) > 2) {
+                    // Just a time sync drift check
+                    if (Math.abs(player.currentTime - seekTime) > 3) {
                         player.currentTime = seekTime;
                     }
                 }
